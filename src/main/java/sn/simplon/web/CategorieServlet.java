@@ -1,6 +1,7 @@
 package sn.simplon.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import sn.simplon.dao.CategorieImpl;
 import sn.simplon.dao.ICategorie;
 import sn.simplon.entities.Categorie;
+
+
 
 /**
  * Servlet implementation class CategorieServlet
@@ -32,6 +35,7 @@ public class CategorieServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
     	// TODO Auto-generated method stub
     	categoriedao = new CategorieImpl();
+    	
 //    	
     }
 	/**
@@ -39,11 +43,10 @@ public class CategorieServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Categorie categorie = new Categorie();
-		categorie.setNomcategorie("Electronique");
-		int result = categoriedao.add(categorie);
-		response.getWriter().print(result);
-		request.getRequestDispatcher("accueil.jsp").forward(request, response);
+	
+//		List<Categorie> ListCat = new categoriedao.add();
+//		request.setAttribute("Liste_Categorie", ListCat);
+		request.getRequestDispatcher("WEB-INF/views/categorie/formCategorie.jsp").forward(request, response);
 	}
 
 	/**
@@ -51,7 +54,11 @@ public class CategorieServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String nomCateorie = request.getParameter("nomCategorie");
+		Categorie categorie = new Categorie();
+		categorie.setNomcategorie("nomCategorie");
+		categoriedao.add(categorie);
+		
 	}
 
 }

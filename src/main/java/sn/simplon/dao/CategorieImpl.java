@@ -14,7 +14,7 @@ public class CategorieImpl  implements ICategorie{
 		
 	EntityManagerFactory emf =  Persistence.createEntityManagerFactory("AtelierJpa1");
 	em = emf.createEntityManager();
-	}
+	}	
 
 	@Override
 	public int add(Categorie categorie) {
@@ -47,6 +47,14 @@ public class CategorieImpl  implements ICategorie{
 	@Override
 	public int update(Categorie categorie) {
 		// TODO Auto-generated method stub
+		try {
+			em.getTransaction().begin();
+			em.merge(categorie);
+			em.getTransaction().commit();
+			return 1;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return 0;
 	}
 
